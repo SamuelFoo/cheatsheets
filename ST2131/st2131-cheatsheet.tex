@@ -852,7 +852,11 @@
   \definition{standard normal distribution} $X \sim N(0,1)$
 
   \begin{itemize}
-    \item $F(x) = P(X \leq x) = \frac{1}{\sqrt{r \pi}} \int^x_{-\infty} e^{-\frac{1}{2}y^2} \mathop{dy} = \Phi(x)$
+    \item $F(x) = P(X \leq x) = \frac{1}{\sqrt{2 \pi}} \int^x_{-\infty} e^{-\frac{1}{2}y^2} \mathop{dy} = \Phi(x)$
+  \end{itemize}
+
+  \begin{itemize}
+    \item $\Phi(x) = 1 - \Phi(-x)$
   \end{itemize}
 
   \subsubsection{Normal Approximation to the Binomial Distribution}

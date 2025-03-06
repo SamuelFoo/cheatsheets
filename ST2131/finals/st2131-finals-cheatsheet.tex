@@ -673,7 +673,7 @@
   if the pdf of $X$ is given by
 
   \begin{tightcenter}
-    $f(x) = \frac{1}{\sqrt{2\pi} \sigma}e^{-\frac{1}{2} (\frac{x}{\mu}\sigma)^2}$, $\quad -\infty < x < \infty$
+    $f(x) = \frac{1}{\sqrt{2\pi} \sigma}e^{-\frac{(x-\mu)^2}{2 \sigma^2}}$, $\quad -\infty < x < \infty$
 
     $E(x) = \mu, \quad Var(X) = \sigma^2$
   \end{tightcenter}
@@ -690,7 +690,11 @@
   \definition{standard normal distribution} $X \sim N(0,1)$
 
   \begin{itemize}
-    \item $F(x) = P(X \leq x) = \frac{1}{\sqrt{r \pi}} \int^x_{-\infty} e^{-\frac{1}{2}y^2} \mathop{dy} = \Phi(x)$
+    \item $F(x) = P(X \leq x) = \frac{1}{\sqrt{2 \pi}} \int^x_{-\infty} e^{-\frac{1}{2}y^2} \mathop{dy} = \Phi(x)$
+  \end{itemize}
+
+  \begin{itemize}
+    \item $\Phi(x) = 1 - \Phi(-x)$
   \end{itemize}
 
   \subsubsection{Normal Approximation to the Binomial Distribution}
@@ -717,7 +721,7 @@
       $E(X) = \frac{1}{\lambda}, \quad Var(X) = \frac{1}{\lambda^2}$
       \ \\ \ 
 
-      $P(X < a) = \int^a_0 \lambda e^{-\lambda x} \dx$
+      $P(X < a) = \int^a_0 \lambda e^{-\lambda x} \dx = 1 - e^{-\lambda a}$
     \end{tightcenter}
   \end{minipage}
 
@@ -892,23 +896,6 @@
 
     \ildefinition{marginal pdf of $Y$}, $f_Y(x) = \int^\infty_{-\infty} f(x, y) \dx$
   \end{minipage}
-
-  \subsubsection{how to do a double integral}
-
-  \begin{minipage}[c]{0.55\linewidth}
-    \textbf{example} - given the joint pdf of $X$ and $Y$, find the pdf of r.v. $X/Y$.
-
-    \begin{niceproof}[ans]
-      set dummy variable $W = X/Y$, 
-      then $F_W(w) = P(W \leq w) = P(\frac{X}{Y} \leq w)$
-
-      $P(\frac{X}{Y} \leq w) = \int^\infty_0 \int^{wy}_0 e^{-x-y} \dx \dy $
-    \end{niceproof}
-  \end{minipage}
-  \begin{minipage}[c]{0.4\linewidth}
-    \includegraphics[width=0.95\linewidth]{st2131-double-integral-eg-3.png} 
-  \end{minipage}
-
 
   \subsection{Independent Random Variables}
 
@@ -1229,7 +1216,7 @@
     \subsubsection{Common mgf's}
 
     \begin{itemize}
-      \item $X \sim Normal(0, 1), \quad M(t) = e^{e^2/2}$
+      \item $X \sim Normal(\mu, \sigma^2), \quad M(t) = e^{\frac{\sigma^2 t^2}{2} + \mu t}$
       \item $X \sim Binomial(n, p), \quad M(t) = (pe^t + (1-p))^n$
       \item $X \sim Poisson (\lambda), \quad M(t) = \exp [ \lambda (e^t - 1) ] $
       \item $X \sim Exp(\lambda), \quad M(t) = \frac{\lambda}{\lambda - t}$
@@ -1238,7 +1225,7 @@
 
     \section{08. LIMIT THEOREMS}
 
-    \definition{Markov's Inequality} if $X$ is a non-negative r.v., $\forall a > 0$, $\;\; P(X \geq a) \leq \frac{E(x)}{a}$.
+    \definition{Markov's Inequality} if $X$ is a non-negative r.v., $\forall a > 0$, $P(X \geq a) \leq \frac{E(x)}{a}$.
 
     \definition{Chebyshev's inequality} if $X$ is an r.v. with finite mean $\mu$ and variance $\sigma^2$, then for any value of  $k>0$, 
     $\quad \quad P(\vert X - \mu \vert \geq k) \leq \frac{\sigma^2}{k^2}$.
@@ -1268,6 +1255,14 @@
     let $X_1, X_2, \dots$ be a sequence of independent and identically distribution r.v.s, each having finite mean $\mu = E[X_i]$. 
     \\* Then, with probability  $1$, 
     $\frac{X_1 + \dots + X_n}{n} \to \mu$ as $n \to \infty$
+
+    \definition{Chernoff bounds}
+    Suppose $X$ is a r.v. and $a$ constant. 
+    \\* $P(X \geq a) \leq e^{-ta} M_X(t)$, for all $t > 0$
+    \\* $P(X \leq a) \leq e^{-ta} M_X(t)$, for all $t < 0$
+
+    \definition{Jensen's Inequality}
+    If $f(x)$ is a convex function ($f''(x) \geq 0$), and the expectation exists and is finite, $E(f(X)) \geq f(E(X))$
 
     \begin{center}
       \fbox{%
